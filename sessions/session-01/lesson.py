@@ -68,8 +68,9 @@ def fair_effect():
 # One run of each setting gives a wobbly answer. The *mean* of n runs wobbles less: its
 # scatter is NOISE_SD / sqrt(n). `p_wrong_sign(n)` is the chance that a fair test with n
 # runs per setting says the lid makes things *worse* (a positive difference) when it really
-# helps. The difference of two means has scatter sqrt(2/n) * NOISE_SD; the chance of a wrong
-# sign is the normal tail beyond |effect| / that scatter.
+# helps. The difference of two means has scatter sqrt(2/n) * NOISE_SD (two independent means,
+# so their variances add); the chance of a wrong sign is the normal tail beyond
+# |effect| / that scatter.
 
 # %%
 def normal_tail(z):
@@ -78,6 +79,7 @@ def normal_tail(z):
 
 
 def p_wrong_sign(n):
+    """Chance that a fair test with n runs per setting reports a positive (wrong-sign) lid effect."""
     scatter = NOISE_SD * math.sqrt(2.0 / n)
     return normal_tail(abs(LID_EFFECT) / scatter)
 
@@ -123,8 +125,9 @@ INSTRUMENTS = {
 
 # %% [markdown]
 # ## Step 5: see it
-# Left: the four thermometers as target boards (each dot is one reading; the cross is the
-# truth). Right: how often a one-run test gets the wrong answer, against the number of runs.
+# First figure: the four thermometers as target boards (each dot is one reading; the red cross
+# is the truth). Second figure: how often a fair test gets the wrong sign, against the number
+# of runs per setting n.
 
 # %%
 if __name__ == "__main__":

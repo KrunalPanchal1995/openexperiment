@@ -26,8 +26,8 @@ A fair test changes one thing (the lid) and keeps everything else the same (same
 
 | Symbol | Meaning | Unit |
 |---|---|---|
-| lid effect | true change in cooling drop caused by the lid (-1.0) | degrees C |
-| cup effect | true change caused by a big cup (-3.0) | degrees C |
+| lid effect | true change in the cooling drop caused by the lid (-1.0: with the lid the water cools 1.0 degrees C less) | degrees C |
+| cup effect | true change in the cooling drop caused by a big cup (-3.0) | degrees C |
 | sd | scatter of one measurement (1.5 for the cooling test) | degrees C |
 | n | repeats per setting | no unit |
 | bias | average reading minus the truth | degrees C |
@@ -58,7 +58,7 @@ The first figure shows four thermometers as target boards: the red cross is the 
 *The chance that a fair test gets the wrong sign falls as the number of runs per setting grows.*
 
 ## D. Interactive simulation
-Run the lesson (`python start.py 1`), then open the live app: [Session 1: accurate versus precise](https://krunalpanchal1995.github.io/openexperiment/session-01/) (or `app.html` in this folder). Move the bias, scatter and n sliders. In the readings view, watch how dots spread (scatter), shift (bias) and how the black triangle (their mean) behaves as n grows. In the graph view see that the red bias line never moves down when n grows.
+Run the lesson (`python start.py 1`), then open the live app: [Session 1: accurate versus precise](https://krunalpanchal1995.github.io/openexperiment/session-01/) (or `app.html` in this folder). Move the bias, scatter and n sliders. In the readings view, watch how dots spread (scatter), shift (bias) and how the black triangle (their mean) behaves as n grows. In the graph view, notice that the red bias line stays at the same height however large n grows: averaging cannot remove a bias.
 
 **Challenge.** Get the typical error of the average below 0.5 degrees C.
 
@@ -68,7 +68,7 @@ Run the lesson (`python start.py 1`), then open the live app: [Session 1: accura
 1. Unfair test, no scatter: (20 - 1 - 3) - 20 = -4 degrees C. It reports -4, but the lid is only -1; the extra -3 is the cup size.
 2. Fair test, no scatter: (20 - 1) - 20 = -1 degrees C: the true lid effect.
 3. With n = 1 the difference of two runs has scatter 1.5 * sqrt(2) = 2.12 degrees C.
-4. A wrong sign needs the difference to exceed 0, that is a shift of 1 / 2.12 = 0.471 standard deviations: the normal tail beyond 0.471 is 0.319.
+4. The true difference is -1.0. A wrong sign means the measured difference comes out above 0, that is, at least 1.0 / 2.12 = 0.471 standard deviations above its true value. The chance of that is the normal tail beyond 0.471, which is 0.319.
 
 **Answer.** The unfair test gives -4 (wrong by the cup effect, -3). A one-run fair test says the lid makes things worse in 0.319 of cases, about one time in three. With 9 runs per setting this falls to 0.079.
 
@@ -110,7 +110,7 @@ Scatter = 1.5 * sqrt(2 / 9) = 0.707 degrees C. z = 1 / 0.707 = 1.414, and the no
 <details>
 <summary>Hint</summary>
 
-Compare the blue curve (random part) and the red line (bias).
+Compare the blue curve (random part, which shrinks with n) and the red line (bias, which does not).
 
 </details>
 
